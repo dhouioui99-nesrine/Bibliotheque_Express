@@ -1,0 +1,109 @@
+<html>
+  
+<head>
+    <link rel="stylesheet" href="css/style.css">
+    
+   
+    <title>Bibliotheque Express</title>
+    <style>
+        footer {
+  text-align: center;
+  padding: 3px;
+  background-color: black;
+  color: white;
+}
+ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+li {
+  float: left;
+  
+}
+
+li a {
+  display: block;
+  padding: 8px;
+  
+ 
+  
+}
+
+a:hover
+{
+  text-decoration: underline;
+  
+}
+    
+    form {
+    width: 400px;
+    margin: auto;
+    margin-top: 250px;
+  }
+  input {
+    padding: 4px 10px;
+    border: 0;
+    font-size: 16px;
+  }
+  .search {
+    width: 75%;
+  }
+  .submit {
+    width: 70px;
+    background-color: #1c87c9;
+  }
+  </style>
+
+
+</head>
+<body>
+ 
+    <ul>
+      
+
+       <li>  <img height="60" width="100" alt="Express" th:src="@{/images/bibi.jpg}" /></li>
+       
+       <li><a class="navbar-brand" th:href="@{/index}">Accueil</a></li>&ensp;&ensp;&ensp;
+        <li><a href="@{/livre}">Catalogue</a></li>
+        <li><a href="#"> services</a></li>
+        &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
+      
+        <li style="float:right"><a class="active" href="@{/login}"> connexion </a></li>
+        &ensp;&ensp;
+        <li style="float:right"><a class="active" href="@{/register}">S'inscrie</a></li>
+        <input class="search_query form-control ac_input" type="text" id="search_query_top" name="search_query" placeholder="Rechercher" value="" autocomplete="off">
+        <button type="submit" name="submit_search" class="btn btn-default button-search"> <span>Rechercher</span> </button>
+      </ul>
+       <hr>
+       <div style="position:relative;">
+     
+       <img src="../../static/images/ima.jpg"  height=100% width=100%   th:src="@{/images/ima.jpg}"/>
+       <div style="position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); font-size:24px; color:black; text-align:center;">
+    <div class="titre">
+        <h1> Bienvenue  !! </h1>
+    </div> 
+    <div class="bouton">
+        <a href="#"  class="btn"> Voir  </a>
+    </div>        
+  </div>
+</div>
+ 
+    
+
+    
+    
+<footer>
+  <p>Hermosa vous souhaite la Bienvenue<br> Merci d'avoir choisi <br>
+  Vous pouvez nous contacter <br>email :<a href="Express_tunisie@gmail.com">Express_tunisie@gmail.com</a><br>
+  Télephone : 21-866-718 <br> Fix : 71-254-458
+
+
+
+</p>
+</footer>
+
+
+</body></html>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>livre</title>
+
+<link rel="stylesheet"
+ href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+ integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+ crossorigin="anonymous">
+ 
+</head>
+<body>
+ <div class="container my-2">
+ <h1>livre List</h1> 
+
+<hr>
+
+ <a th:href = "@{/livre}" class="btn btn-primary btn-sm mb-3"> Add livre </a>
+  <table border="2" class = "table table-striped table-responsive-md">
+   <thead>
+    <tr>
+    <th> categorie</th>
+     <th>id livre</th>
+     <th>Titre</th>
+     <th> Auteur</th>
+     <th>Date Publication</th>
+     <th>num_ESRN</th>
+     <th> Exemplaire</th>
+  
+     <th>Actions</th>
+     
+    </tr>
+   </thead>
+   <tbody>
+    <tr th:each="livre : ${livre}">
+       
+    <td th:text="${livre.categorieNames}"></td>
+     <td th:text="${livre.id}"></td>
+     <td th:text="${livre.titre}"></td>
+     <td th:text="${livre.auteur}"></td>
+     <td th:text="${livre.date_pub}"></td>
+     <td th:text="${livre.num_ESRN}"></td>
+     <td th:text="${livre.Exemplaire}"></td>
+    
+    
+     <td>
+        <a th:href="@{/update_livre/{id}(id=${livre.id})}">
+            <button type="button" class="btn btn-primary move"><i class="fa-sharp fa-solid fa-pen-to-square"></i></button>
+        </a>
+        <a th:href="@{/deleteLivre/{id}(id=${livre.id})}">
+        <button type="submit" class="btn btn-danger"><i class="fa-sharp fa-solid fa-trash"></i></button>
+    </a>
+    </td>
+
+    </tr>
+   
+   </tbody>
+  </table>
+ </div>
+</body>
+</html>

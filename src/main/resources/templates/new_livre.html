@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Add livre</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <h1>+ livre</h1>
+        <hr>
+        <h2>Save livre</h2>
+
+        <div class="container">
+            <div class="row col-md-8 offset-md-2">
+              <div class="card">
+                <div class="card-header">
+                    <h2 class="text-center">new</h2>
+                </div>
+                <div th:if="${param.success}">
+                    <div class="alert alert-info">
+                      You have successfully livre our app!
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form
+                      method="post"
+                      role="form"
+                      th:action="@{/livre}"
+                      th:object="${livre}"
+                    >
+                      <div class="form-group mb-3">
+                        <label class="form-label">Titre</label>
+                        <input
+                                class="form-control"
+                                id="titre"
+                                name="titre"
+                                placeholder="Enter  titre"
+                                th:field="*{titre}"
+                                type="text"
+                        />
+                        <p th:errors = "*{titre}" class="text-danger"
+                        th:if="${#fields.hasErrors('titre')}"></p>
+                      </div>
+          
+                      <div class="form-group mb-3">
+                        <label class="form-label">Auteur</label>
+                        <input
+                                class="form-control"
+                                id="auteur"
+                                name="auteur"
+                                placeholder="Enter auteur"
+                                th:field="*{auteur}"
+                                type="text"
+                        />
+                        <p th:errors = "*{auteur}" class="text-danger"
+                           th:if="${#fields.hasErrors('auteur')}"></p>
+                      </div>
+                      <div class="form-group mb-3">
+                        <label class="form-label updatelabelb text-dark justify-content-start m-0">The Date of Publication</label>
+                        <input class="form-control"
+                               id="date_pub"
+                               name="date_pub"
+                               placeholder="20-10-1925"
+                               th:field="*{date_pub}"
+                               type="date"
+                        />
+                        <p th:errors="*{date_pub}" class="text-danger"
+                           th:if="${#fields.hasErrors('date_pub')}">
+                        </p>
+                    </div>
+                      
+                      <div class="form-group mb-3">
+                        <label class="form-label">num_ESRN</label>
+                        <input
+                                class="form-control"
+                                id="num_ESRN"
+                                name="num_ESRN"
+                                placeholder="Enter num_ESRN"
+                                th:field="*{num_ESRN}"
+                                type="text"
+                        />
+                    
+                        <p th:errors = "*{Exemplaire}" class="text-danger"
+                           th:if="${#fields.hasErrors('Exemplaire')}"></p>
+                      </div>
+                      <div class="form-group mb-3">
+                        <label class="form-label">Exemplaire</label>
+                        <input
+                                class="form-control"
+                                id="Exemplaire"
+                                name="Exemplaire"
+                                placeholder="Exemplaire"
+                                th:field="*{Exemplaire}"
+                                type="text"
+                        />
+                    
+                        <p th:errors = "*{Exemplaire}" class="text-danger"
+                           th:if="${#fields.hasErrors('Exemplaire')}"></p>
+                      </div>
+
+                      <div class="form-group mb-3">
+                        <label class="form-label">Categories</label>
+                        <br>
+                        <select class="form-select" id="categories" name="categories" multiple="multiple" th:field="*{categorieIds}">
+                            <option th:each="categorie : ${allCategories}" th:value="${categorie.id}" th:text="${categorie.name}"></option>
+                        </select>
+                    </div>
+                      <div class="form-group">
+                        <button class="btn btn-primary" type="submit">ajouter livre</button>
+                        
+                      </div>
+                    </form>
+                </div>
+              </div>
+            </div>
+          </div>
+          </body>
+          </html>

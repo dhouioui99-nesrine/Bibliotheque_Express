@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="ISO-8859-1">
+    <title>modifier livre</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row col-md-8 offset-md-2">
+            <div class="card">
+                <div th:if="${param.success}">
+                    <div class="alert alert-info">You've Successfully Updated This Book</div>
+                </div>
+                <div class="card-header">
+                    <h2 class="text-center">Update Book</h2>
+                </div>
+                <div class="card-body">
+                    <form th:action="@{/updatelivre}" th:object="${livre}" method="post">
+                        <div class="form-group mb-3">
+                            <label class="form-label">Book Id</label>
+                            <input class="form-control"
+                                   id="id"
+                                   name="id"
+                                   placeholder="Enter New Title"
+                                   th:field="*{id}"
+                                   type="text"
+                                   readonly
+                            />
+                            <p th:errors="*{titre}" class="text-danger"
+                               th:if="${#fields.hasErrors('titre')}">
+                            </p>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="form-label">titre</label>
+                            <input class="form-control"
+                                   id="titre"
+                                   name="titre"
+                                   placeholder="Enter New Title"
+                                   th:field="*{titre}"
+                                   type="text"
+                            />
+                            <p th:errors="*{titre}" class="text-danger"
+                               th:if="${#fields.hasErrors('titre')}">
+                            </p>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="form-label">auteur</label>
+                            <input class="form-control"
+                                   id="auteur"
+                                   name="auteur"
+                                   placeholder="Enter New Author Name"
+                                   th:field="*{auteur}"
+                                   type="text"
+                            />
+                            <p th:errors="*{auteur}" class="text-danger"
+                               th:if="${#fields.hasErrors('auteur')}">
+                            </p>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="form-label">The Date of Publication</label>
+                            <input class="form-control"
+                                   id="date_pub"
+                                   name="date_pub"
+                                   placeholder="Enter New Date of Publish"
+                                   th:field="*{date_pub}"
+                                   type="date"
+                            />
+                            <p th:errors="*{date_pub}" class="text-danger"
+                               th:if="${#fields.hasErrors('date_pub')}">
+                            </p>
+                        </div>
+    
+                        <div class="form-group mb-3">
+                            <label class="form-label">num_ESRN</label>
+                            <input class="form-control"
+                                   id="num_ESRN"
+                                   name="num_ESRN"
+                                   placeholder="Enter New Price"
+                                   th:field="*{num_ESRN}"
+                                   type="text"
+                            />
+                            <p th:errors="*{num_ESRN}" class="text-danger"
+                               th:if="${#fields.hasErrors('num_ESRN')}">
+                            </p>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="form-label">Exemplaire</label>
+                            <input class="form-control"
+                                   id="Exemplaire"
+                                   name="Exemplaire"
+                                   placeholder="Enter New ISBN Number"
+                                   th:field="*{Exemplaire}"
+                                   type="text"
+                            />
+                            <p th:errors="*{Exemplaire}" class="text-danger"
+                               th:if="${#fields.hasErrors('Exemplaire')}">
+                            </p>
+                        </div>
+                        
+                        <div class="form-group mb-3">
+                            <label class="form-label">Category</label>
+                            <select class="form-control" id="categories" name="selectedCategories" multiple >
+                                <option th:each="categorie : ${allCategories}" th:value="${categorie.id}"
+                                        th:text="${categorie.name}" th:selected="${livre.categories.contains(categorie)}"></option>
+                            </select>
+                        </div>
+    
+                      
+                        <input type="submit" value="modifier"/>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </body>
+    </html>
