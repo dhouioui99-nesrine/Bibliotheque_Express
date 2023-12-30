@@ -6,6 +6,7 @@ package com.example.express.Controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 //import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -49,7 +50,6 @@ public class LivreController {
     }
 
  
-
       @GetMapping("/list")
     public String listlivre(Model model) {
         List<LivreDto> livre;
@@ -63,13 +63,13 @@ public class LivreController {
     }
 
     //@PreAuthorize("hasRole('BIBLIOTHECAIRE')")
-     @RequestMapping(value = "/list/{id}", method = {RequestMethod.DELETE, RequestMethod.POST})
+   /*   @RequestMapping(value = "/list/{id}", method = {RequestMethod.DELETE, RequestMethod.POST})
     public String  deleteBook(@PathVariable("id") Long id, RedirectAttributes redirectAttributes){
     // delete book from DB
         livreService.deleteLivre(id);
         redirectAttributes.addFlashAttribute("deleteSuccess", true);
         return "redirect:/list";
-    }
+    }*/
 
   //  @PreAuthorize("hasRole('BIBLIOTHECAIRE')")
     @PostMapping("/livre")
@@ -82,7 +82,7 @@ public class LivreController {
             return "new_livre";
         }
         livreService.saveLivre(livre);
-        return "list";
+        return "redirect:/livre?success";
     }
     //@PreAuthorize("hasRole('BIBLIOTHECAIRE')")
     @GetMapping("/livre")
@@ -96,23 +96,27 @@ public class LivreController {
 
     @GetMapping("/update_livre/{id}")
     public String update(@PathVariable("id") Long id, Model model) {
-        System.out.println("hello");
         Livre livre = livreService.getLivreById(id);
-        List<Categorie> allCategories = categorieService.getAllCategories();
-        model.addAttribute("livre", livre);
+        List<Categorie> allCategories = categorieRepository.findAll();
         model.addAttribute("allCategories", allCategories);
+        model.addAttribute("livre", livre);
         return "update_livre";
     }
-    //@PreAuthorize("hasRole('BIBLIOTHECAIRE')")
-    @PostMapping("/updatelivre")
-    public String updatelivre(@ModelAttribute("livre") LivreDto updatedBook, @RequestParam(name = "selectedCategories", required = false) List<Long> selectedCategories, RedirectAttributes redirectAttributes) {
-       
+    @PreAuthorize("hasRole('USER')")
+    @PostMapping("/update_livre")
+    public String update_livre(@ModelAttribute("book") LivreDto updatedBook, @RequestParam(name = "selectedCategories", required = false) List<Long> selectedCategories, RedirectAttributes redirectAttributes) {
         Long id = updatedBook.getId();
         updatedBook.setCategorieIds(selectedCategories);
         livreService.updateBook(id, updatedBook);
         redirectAttributes.addFlashAttribute("updateSuccess", true);
-        return "list";
+        return "redirect:/list";
     }
 
-
+    @GetMapping("/deleteBook/{id}")
+    public String deleteBook(@PathVariable (value = "id") long id) {
+     
+    
+     this.livreService.deleteLivre(id);
+     return "redirect:/list";
+    }
 }

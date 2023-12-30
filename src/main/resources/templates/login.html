@@ -43,19 +43,7 @@ input {
 </head>
 <body>
 
-    <ul>
-      
-        
-         <li><a class="navbar-brand" th:href="@{/index}">Accueil</a></li>&ensp;&ensp;&ensp;
-         <li><a class="navbar-brand" href="@{/livre}">Catalogue</a></li>
-         <li><a class="navbar-brand" href="#"> services</a></li>
-         &ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;&ensp;
-       
-         <li style="float:right"><a class="active" href="@{/login}"> connexion </a></li>
-         &ensp;&ensp;
-         <li style="float:right"><a class="active" href="@{/register}">S'inscrie</a></li>
-        
-       </ul>
+    <div th:include="nav/navbar :: header" ></div>
 
 <br /><br />
 <hr>

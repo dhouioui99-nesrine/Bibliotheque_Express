@@ -54,8 +54,8 @@ public class SpringSecurity {
                                
                                .requestMatchers("/update_livre/**").hasRole("USER")
 
-                                .requestMatchers("/deleteLivre").permitAll()
-                               .requestMatchers("/deleteLivre/**").hasRole("USER")
+                                .requestMatchers("/deleteBook").permitAll()
+                               .requestMatchers("/deleteBook/**").hasRole("USER")
 
 
 

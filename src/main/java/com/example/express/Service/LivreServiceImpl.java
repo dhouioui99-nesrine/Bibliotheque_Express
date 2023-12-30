@@ -7,7 +7,7 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-
+import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.example.express.Entity.Categorie;
@@ -102,26 +102,25 @@ public List<LivreDto> findAllLivre() {
   
 // autre function 
 
-
-
 @Override
-    public void deleteLivre(Long id) {
+public void deleteLivre(Long id) {
+    Optional<Livre> livreOptional = livrerepo.findById(id);
 
-        Livre livre = livrerepo.getLivreById(id);
+    if (livreOptional.isPresent()) {
+        Livre livre = livreOptional.get();
 
-        if (livre != null) {
-            // Remove the book from categories to avoid cascading issues
-            for (Categorie categorie : livre.getCategories()) {
-                categorie.getLivres().remove(livre);
-            }
-
-            // Clear the categories from the book
-            livre.getCategories().clear();
-
-            // Delete the book
-            livrerepo.delete(livre);
+        // Remove the book from categories to avoid cascading issues
+        for (Categorie categorie : livre.getCategories()) {
+            categorie.getLivres().remove(livre);
         }
+
+        // Clear the categories from the book
+        livre.getCategories().clear();
+
+        // Delete the book
+        livrerepo.delete(livre);
     }
+}
 
     @Override
     public Map<String, Long> getCategoryStatistics() {
@@ -140,7 +139,8 @@ public List<LivreDto> findAllLivre() {
     }
 
 
-    @Override
+   
+     @Override
     public void updateBook(Long id, LivreDto updatedBook) {
         Livre livre = livrerepo.getLivreById(id);
 
@@ -168,6 +168,8 @@ public List<LivreDto> findAllLivre() {
     }
 
 
+    
+
     @Override
 public Livre getLivreById(long id) {
     Optional < Livre > optional = livrerepo.findById(id);
@@ -175,7 +177,7 @@ public Livre getLivreById(long id) {
     if (optional.isPresent()) {
         livre = optional.get();
     } else {
-        throw new RuntimeException(" Employee not found for id :: " + id);
+        throw new RuntimeException(" livre not found for id :: " + id);
     }
     return livre;
 }

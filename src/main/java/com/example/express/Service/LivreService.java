@@ -26,7 +26,10 @@ public interface LivreService {
 
     Map<String, Long> getCategoryStatistics();
 
-    void deleteLivre(Long id);
+    public void deleteLivre(Long id);
+
+    
+
 
     void updateBook(Long id, LivreDto livreDto);
 
