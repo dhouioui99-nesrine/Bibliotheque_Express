@@ -6,10 +6,7 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
-import org.springframework.data.crossstore.ChangeSetPersister.NotFoundException;
 import org.springframework.stereotype.Service;
-
 import com.example.express.Entity.Categorie;
 import com.example.express.Entity.Livre;
 import com.example.express.Repository.CategorieRepository;
@@ -54,14 +51,7 @@ public class LivreServiceImpl  implements LivreService{
             livre.setCategories(categories);
             livrerepo.save(livre);
 }
-/* 
-    @Override
-    public Livre findById(Long id) {
-        Livre livre = livrerepo.findId(id);
-        return livre;
-    }
 
-*/
     @Override
     public LivreDto findByIdd(Long Id) {
         return null;
@@ -71,9 +61,9 @@ public class LivreServiceImpl  implements LivreService{
 
 // all livre
     @Override
-public List<LivreDto> findAllLivre() {
-        List<Livre> livres = livrerepo.findAll();
-        return livres.stream().map(this::convertEntityToDtoWithCategorieNames).collect(Collectors.toList());
+        public List<LivreDto> findAllLivre() {
+             List<Livre> livres = livrerepo.findAll();
+            return livres.stream().map(this::convertEntityToDtoWithCategorieNames).collect(Collectors.toList());
     }
 
     private LivreDto convertEntityToDtoWithCategorieNames(Livre livre){
@@ -101,7 +91,7 @@ public List<LivreDto> findAllLivre() {
 
   
 // autre function 
-
+//delete livre
 @Override
 public void deleteLivre(Long id) {
     Optional<Livre> livreOptional = livrerepo.findById(id);
@@ -139,7 +129,7 @@ public void deleteLivre(Long id) {
     }
 
 
-   
+   //update livre
      @Override
     public void updateBook(Long id, LivreDto updatedBook) {
         Livre livre = livrerepo.getLivreById(id);

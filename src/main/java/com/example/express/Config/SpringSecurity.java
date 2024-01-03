@@ -38,26 +38,32 @@ public class SpringSecurity {
                         authorize.requestMatchers("/register/**").permitAll()
                                 .requestMatchers("/index").permitAll()
 
-                                .requestMatchers("/list").permitAll()
                                 .requestMatchers("/list/**").permitAll()
-                                      .requestMatchers("/list/**").hasRole("USER")
-                              
-                                  .requestMatchers("/livre/save").hasRole("USER")
+                                 
+    
                                 .requestMatchers("/livre/save/**").hasRole("USER")
 
-                                .requestMatchers("**/livre").permitAll()
                                 .requestMatchers("/livre/**").permitAll()
 
                                 .requestMatchers("/update_livre/**").permitAll()
-                                .requestMatchers("/update_livre").permitAll()
                                 .requestMatchers("updatelivre").permitAll()
-                               
                                .requestMatchers("/update_livre/**").hasRole("USER")
 
                                 .requestMatchers("/deleteBook").permitAll()
                                .requestMatchers("/deleteBook/**").hasRole("USER")
 
+                                 .requestMatchers("/list_cat/**").permitAll()
 
+                                 .requestMatchers("/update_cat/**").permitAll()
+                                 .requestMatchers("/deletecat/**").permitAll()
+                                  .requestMatchers("/update_cat").permitAll()
+                                 .requestMatchers("/deletecat").permitAll()
+
+                                
+                                
+
+                                .requestMatchers("**/cat").permitAll()
+                                .requestMatchers("/cat").permitAll()
 
                                 
                                 .requestMatchers("/users").hasRole("ADMIN")
@@ -96,7 +102,7 @@ public class SpringSecurity {
                     return "/users"; // Redirect to admin page for users with ROLE_ADMIN
                 } else if  (authentication.getAuthorities().stream()
                         .anyMatch(grantedAuthority -> grantedAuthority.getAuthority().equals("ROLE_USER"))) {
-                    return "/list"; // Redirect to admin page for users with ROLE_USER
+                    return "/cat"; // Redirect to admin page for users with ROLE_USER
                         }
                 else {
                     return "/index";

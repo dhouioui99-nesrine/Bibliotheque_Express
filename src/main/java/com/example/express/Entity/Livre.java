@@ -37,6 +37,13 @@ public class Livre {
     private List<Categorie> categories = new ArrayList<>();
   
 
+    @ManyToMany(mappedBy="livre")
+    private List<Catalogue> catalogues;
+
+
+
+
+
 
 
 
@@ -44,7 +51,7 @@ public class Livre {
 
 
     public Livre(Long id, String titre, String auteur, String date_pub, Long num_ESRN, int exemplaire,
-            List<Categorie> categories) {
+            List<Categorie> categories, List<Catalogue> catalogues) {
         this.id = id;
         this.titre = titre;
         this.auteur = auteur;
@@ -52,6 +59,7 @@ public class Livre {
         this.num_ESRN = num_ESRN;
         Exemplaire = exemplaire;
         this.categories = categories;
+        this.catalogues = catalogues;
     }
 
 
@@ -145,6 +153,22 @@ public class Livre {
 
 
 
+
+    public List<Catalogue> getCatalogues() {
+        return catalogues;
+    }
+
+
+
+
+    public void setCatalogues(List<Catalogue> catalogues) {
+        this.catalogues = catalogues;
+    }
+
+
+
+
+ 
 
 
 }

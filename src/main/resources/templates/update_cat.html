@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="ISO-8859-1">
+    <title>modifier livre</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="container">
+        <div class="row col-md-8 offset-md-2">
+            <div class="card">
+                <div th:if="${param.success}">
+                    <div class="alert alert-info">You've Successfully Updated This catalogue</div>
+                </div>
+                <div class="card-header">
+                    <h2 class="text-center">Update catalogue</h2>
+                </div>
+                <div class="card-body">
+                    <form th:action="@{/update_cat}" th:object="${catalogue}" method="post">
+                        <div class="form-group mb-3">
+                            <label class="form-label">catalogue Id</label>
+                            <input class="form-control"
+                                   id="id"
+                                   name="id"
+                                   placeholder="Enter New id"
+                                   th:field="*{id}"
+                                   type="text"
+                                   readonly
+                            />
+                            <p th:errors="*{id}" class="text-danger"
+                               th:if="${#fields.hasErrors('id')}">
+                            </p>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="form-label">nom</label>
+                            <input class="form-control"
+                                   id="nom"
+                                   name="nom"
+                                   placeholder="Enter New nom"
+                                   th:field="*{nom}"
+                                   type="text"
+                            />
+                            <p th:errors="*{nom}" class="text-danger"
+                               th:if="${#fields.hasErrors('nom')}">
+                            </p>
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="form-label">description</label>
+                            <input class="form-control"
+                                   id="description"
+                                   name="description"
+                                   placeholder="Enter New Author description"
+                                   th:field="*{description}"
+                                   type="text"
+                            />
+                            <p th:errors="*{description}" class="text-danger"
+                               th:if="${#fields.hasErrors('description')}">
+                            </p>
+                        </div>
+                        
+                        
+                        <div class="form-group mb-3">
+                            <label class="form-label">Livre</label>
+                            <select class="form-control" id="livre" name="selectedLivre" multiple >
+                                <option th:each="livre : ${allLivres}" th:value="${livre.id}"
+                                        th:text="${livre.titre}" th:selected="${catalogue.livre.contains(livre)}"></option>
+                            </select>
+                        </div>
+    
+                      
+                        <input type="submit" value="modifier"/>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    </body>
+    </html>

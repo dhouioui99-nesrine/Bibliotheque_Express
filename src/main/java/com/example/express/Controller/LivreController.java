@@ -15,15 +15,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.example.express.Entity.Categorie;
 import com.example.express.Entity.Livre;
 import com.example.express.Repository.CategorieRepository;
-import com.example.express.Service.CategorieServiceImpl;
+
 import com.example.express.Service.LivreService;
 import com.example.express.dto.LivreDto;
 import org.slf4j.Logger;
@@ -39,7 +38,7 @@ public class LivreController {
    
     @Autowired
     private CategorieRepository categorieRepository;
-    private CategorieServiceImpl categorieService;
+  
 
     private static final Logger logger = LoggerFactory.getLogger(LivreController.class);
 
@@ -62,16 +61,8 @@ public class LivreController {
         return "list";
     }
 
-    //@PreAuthorize("hasRole('BIBLIOTHECAIRE')")
-   /*   @RequestMapping(value = "/list/{id}", method = {RequestMethod.DELETE, RequestMethod.POST})
-    public String  deleteBook(@PathVariable("id") Long id, RedirectAttributes redirectAttributes){
-    // delete book from DB
-        livreService.deleteLivre(id);
-        redirectAttributes.addFlashAttribute("deleteSuccess", true);
-        return "redirect:/list";
-    }*/
-
-  //  @PreAuthorize("hasRole('BIBLIOTHECAIRE')")
+  
+    // Ajouter livre :
     @PostMapping("/livre")
     public String add(@ModelAttribute("livre") LivreDto livre,
                                BindingResult result,
@@ -84,7 +75,7 @@ public class LivreController {
         livreService.saveLivre(livre);
         return "redirect:/livre?success";
     }
-    //@PreAuthorize("hasRole('BIBLIOTHECAIRE')")
+    
     @GetMapping("/livre")
     public String addlivre(Model model){
         LivreDto livreDto = new LivreDto();
