@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Emprunts</title>
+</head>
+<body>
+
+<h1>All Emprunts</h1>
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>User</th>
+        <th>Livre</th>
+        <th>Emprunt Date</th>
+        <!-- Add more columns based on your Emprunt entity -->
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="emprunt : ${emprunts}">
+        <td th:text="${emprunt.id}"></td>
+        <td th:text="${emprunt.user.name}"></td>
+        <td th:text="${emprunt.livre.title}"></td>
+        <td th:text="${emprunt.empruntDate}"></td>
+        <!-- Add more cells based on your Emprunt entity -->
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>

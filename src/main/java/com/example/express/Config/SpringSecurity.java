@@ -58,9 +58,12 @@ public class SpringSecurity {
                                  .requestMatchers("/deletecat/**").permitAll()
                                   .requestMatchers("/update_cat").permitAll()
                                  .requestMatchers("/deletecat").permitAll()
+                                .requestMatchers("/emprunts").permitAll()
+                                .requestMatchers("/emprunts/**").permitAll()
 
-                                
-                                
+
+
+
 
                                 .requestMatchers("**/cat").permitAll()
                                 .requestMatchers("/cat").permitAll()
